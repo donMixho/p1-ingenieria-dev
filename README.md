@@ -24,6 +24,7 @@ Para este proyecto trabaje con dos ramas las cuales son GitFlow y Trunk-based de
 | Control de versiones | Alto | Bajo |
 
 ### Ramas del proyecto
+El repositorio está organizado en cuatro ramas, cada una con un rol distinto dentro del flujo de trabajo. Esta separación permite que el código en main siempre esté limpio y funcional, mientras que el desarrollo y las correcciones ocurren en ramas separadas sin afectar la versión estable.
 
 | Rama | Propósito |
 |---|---|
