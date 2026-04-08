@@ -14,6 +14,7 @@ Microservicio de gestión de tareas desarrollado en Python.
 Se eligió **GitFlow** este es un modelo de ramificación potente que puede ayudar a los equipos a gestionar proyectos de software complejos. Proporciona un flujo de trabajo estructurado, una estrategia de ramificación clara y una gestión eficaz de las versiones.
 
 ### Comparación de estrategias
+Para este proyecto trabaje con dos ramas las cuales son GitFlow y Trunk-based development. Elegi GitFlow porque permite tener más orden en el desarrollo, ya que cada cambio pasa por varias ramas antes de llegar a main. Esto es útil cuando recién se está aprendiendo a trabajar con repositorios, porque queda un registro claro de qué se hizo y desde dónde. Trunk-based development es mas ágil pero requiere más experiencia con integración continua.
 
 | Característica | GitFlow | Trunk-based |
 |---|---|---|
