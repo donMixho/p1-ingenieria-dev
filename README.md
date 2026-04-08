@@ -1,12 +1,14 @@
 # p1-ingenieria-dev
 
-Repositorio para Evaluación Parcial 1 - Ingeniería DevOps  
+Repositorio para Evaluación Parcial 1 - Ingeniería Devops  
+nombre: Leandro Rafael ruiz Ruiz
+seccion: DOY0101 - 004D
 Microservicio de gestión de tareas desarrollado en Python.
 
 ---
 ## Estrategia de ramificación: GitFlow
 
-Se eligió **GitFlow** como estrategia de ramificación porque permite separar claramente el desarrollo de nuevas funcionalidades, las correcciones urgentes y el código estable en producción. Esto es ideal para proyectos con ciclos de entrega definidos y trabajo colaborativo.
+Se eligió **GitFlow** este es un modelo de ramificación potente que puede ayudar a los equipos a gestionar proyectos de software complejos. Proporciona un flujo de trabajo estructurado, una estrategia de ramificación clara y una gestión eficaz de las versiones.
 
 ### Comparación de estrategias
 
@@ -41,4 +43,5 @@ Se eligió **GitFlow** como estrategia de ramificación porque permite separar c
 
 ## Uso de IA
 Se utilizó Claude como apoyo para estructurar la documentación y guiar la configuración del
-repositorio, ya que en un principio no contaba con conocimientos en ramas y en github, por ende relice el paso a paso.
+repositorio, ya que en un principio no contaba con conocimientos en ramas y en github, por
+ende relice el paso a paso que se me mostro ya que no habia trabajado con gitflow.
