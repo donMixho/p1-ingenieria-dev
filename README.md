@@ -1,8 +1,9 @@
 # p1-ingenieria-dev
 
 Repositorio para Evaluación Parcial 1 - Ingeniería Devops  
-nombre: Leandro Rafael ruiz Ruiz
-seccion: DOY0101 - 004D
+Nombre: Leandro Rafael ruiz Ruiz
+Seccion: DOY0101 - 004D
+
 Microservicio de gestión de tareas desarrollado en Python.
 
 ---
