@@ -42,11 +42,33 @@ El repositorio está organizado en cuatro ramas, cada una con un rol distinto de
 
 ---
 
-## Estructura del proyecto
+---
 
+## Uso de los los commits durante el proceso
 
+Para mantener el historial ordenado, los commits siguen el estándar Conventional Commits. La idea es que con solo leer el mensaje se entienda qué se hizo:
 
-## Uso de IA
-Se utilizó Claude como apoyo para estructurar la documentación y guiar la configuración del
-repositorio, ya que en un principio no contaba con conocimientos en ramas y en github, por
-ende relice el paso a paso que se me mostro ya que no habia trabajado con gitflow.
+---
+
+## Flujos de merge(unir, conbinar)
+
+Dependiendo del tipo de cambio, el merge sigue un camino distinto dentro del repositorio:
+
+| Flujo | Origen | Destino | Cuándo usarlo |
+|---|---|---|---|
+| Feature | `feature/<nombre>` | `develop` | Al terminar una nueva funcionalidad |
+| Release | `develop` | `main` | Cuando develop está estable y listo |
+| Hotfix | `hotfix/<nombre>` | `main` | Para correcciones urgentes en producción |
+
+---
+
+## Naming de ramas
+
+Los nombres de las ramas siguen un formato fijo para que sea fácil identificar de qué se trata cada una:
+
+| Tipo | Formato | Ejemplo |
+|---|---|---|
+| Feature | `feature/<descripcion>` | `feature/agregar-endpoint` |
+| Hotfix | `hotfix/<descripcion>` | `hotfix/corregir-error` |
+| Release | `release/<version>` | `release/v1.0.0` |
+
