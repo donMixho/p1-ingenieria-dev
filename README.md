@@ -72,3 +72,10 @@ Los nombres de las ramas siguen un formato fijo para que sea fácil identificar 
 | Hotfix | `hotfix/<descripcion>` | `hotfix/corregir-error` |
 | Release | `release/<version>` | `release/v1.0.0` |
 
+---
+
+## Conclusion
+
+Aprendi la importancia de tener una estructura clara de ramas en un repositorio. Ya que no entendia por qué habia que separar el main, develop y feature(se usa para evitar generar problemas entre los que trabajan en equipo aunque en este caso yo trabaje solo).
+Me confundi varias veces entre las rutas de GitBash y GitHub, lo que me hiso cometer errores. Los resolvi gracias a la ayuda de compañeros, videos de youtube y comprendiendo conceptos con la ayuda de google e IA.
+El uso o la aplicacion a lo que aprendi es por ejemplo si un un equipo de desarrollo real o de proyectos personales, GitFlow se usa para que varios programadores trabajen en paralelo sin chocar entre si.
