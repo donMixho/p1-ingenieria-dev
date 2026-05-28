@@ -1,0 +1,56 @@
+name: CI/CD Pipeline - Microservicio Tareas
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: Pruebas Automatizadas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install --upgrade pip && pip install -r requirements.txt
+      - run: pytest tests/ --cov=app --cov-report=xml --cov-report=html --tb=short -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov/
+
+  security:
+    name: Análisis de Seguridad (Snyk)
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snyk/actions/python@master
+        continue-on-error: false
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  build:
+    name: Build Imagen Docker
+    runs-on: ubuntu-latest
+    needs: security
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --target production -t p1-ingenieria-dev:${{ github.sha }} .
+
+  deploy:
+    name: Deploy Entorno Simulado
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y docker-compose
+      - run: docker-compose up -d --build && sleep 15
+      - run: curl -f http://localhost:8000/health || (docker-compose logs && exit 1)
+      - run: docker-compose down
