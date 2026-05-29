@@ -1,3 +1,98 @@
+# p1-ingenieria-dev — Evaluación Parcial 2
+
+**Nombre:** Leandro Rafael Ruiz Ruiz  
+**Sección:** DOY0101 - 004D  
+**Asignatura:** Ingeniería DevOps
+
+---
+
+## Descripción EP2
+
+Microservicio REST de gestión de tareas en Python con FastAPI. Esta EP2 agrega un pipeline CI/CD completo sobre el repositorio de la EP1.
+
+---
+
+## Stack Tecnológico
+
+| Componente | Tecnología |
+|---|---|
+| Lenguaje | Python 3.11 |
+| Framework | FastAPI |
+| Tests | pytest + pytest-cov |
+| Contenedores | Docker (multi-stage) |
+| Orquestación | Docker Compose |
+| CI/CD | GitHub Actions |
+| Seguridad | Snyk + Dependabot |
+
+---
+
+## Endpoints
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/health` | Estado del servicio |
+| GET | `/tareas` | Listar tareas |
+| POST | `/tareas` | Crear tarea |
+| GET | `/tareas/completadas` | Tareas completadas |
+| GET | `/tareas/{id}` | Obtener tarea |
+| PUT | `/tareas/{id}/completar` | Completar tarea |
+| DELETE | `/tareas/{id}` | Eliminar tarea |
+
+---
+
+## Ejecutar localmente con Docker Compose
+
+```bash
+docker-compose up --build   # Levanta el servicio
+# http://localhost:8000/docs  → documentación API
+docker-compose down         # Detiene el servicio
+```
+
+---
+
+## Ejecutar tests
+
+```bash
+pip install -r requirements.txt
+pytest tests/ --cov=app -v
+```
+
+---
+
+## Pipeline CI/CD
+
+Se activa en cada push o PR a `main` o `develop`.
+[1] Pruebas Automatizadas → pytest
+[2] Análisis de Seguridad → Snyk (bloquea si hay vulnerabilidades críticas)
+[3] Build Imagen Docker   → Dockerfile multi-stage
+[4] Deploy Simulado       → Docker Compose (solo en main)
+
+Cada job depende del anterior. Si tests o seguridad fallan, el deploy no ocurre. Todo queda trazado en la pestaña Actions de GitHub.
+
+---
+
+## Seguridad
+
+- **Snyk:** Detecta CVEs en dependencias. Bloquea ante vulnerabilidades críticas.
+- **Dependabot:** Abre PRs semanales con actualizaciones de dependencias.
+- **Docker multi-stage:** Imagen de producción sin herramientas de desarrollo.
+- **Usuario no-root:** Contenedor corre como `appuser`.
+
+---
+
+## Orquestación Docker Compose
+
+- Límite CPU: 0.5 cores
+- Límite memoria: 256 MB
+- Health check cada 30 segundos
+- Red interna `app-network`
+- Reinicio automático `unless-stopped`
+
+---
+---
+
+## Contenido EP1 ↓
+
 # p1-ingenieria-dev
 
 Repositorio para Evaluación Parcial 1 - Ingeniería Devops
