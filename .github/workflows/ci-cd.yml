@@ -11,7 +11,7 @@ jobs:
     name: Pruebas Automatizadas
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: quality-gate
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: snyk/actions/python@master
         continue-on-error: false
         env:
@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: security
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build --target production -t p1-ingenieria-dev:${{ github.sha }} .
 
   deploy:
@@ -76,7 +76,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: sudo apt-get install -y docker-compose
       - run: docker-compose up -d --build && sleep 15
       - run: curl -f http://localhost:8000/health || (docker-compose logs && exit 1)
