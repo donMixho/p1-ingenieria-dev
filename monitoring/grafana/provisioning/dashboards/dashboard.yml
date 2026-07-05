@@ -1,0 +1,15 @@
+apiVersion: 1
+
+providers:
+  - name: "FastAPI Dashboards"
+    orgId: 1
+    folder: "Microservicio Tareas"
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      # Los JSON viven en una subcarpeta para que Grafana no intente
+      # parsear este propio dashboard.yml como si fuera un dashboard.
+      path: /etc/grafana/provisioning/dashboards/json
+      foldersFromFilesStructure: false
