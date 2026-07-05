@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional
+from prometheus_fastapi_instrumentator import Instrumentator
 from app.validaciones import validar_nombre_tarea, validar_id_tarea
 from app.endpoints import obtener_tarea_por_id, eliminar_tarea, filtrar_tareas_completadas
 
@@ -9,6 +10,9 @@ app = FastAPI(
     description="API REST para gestionar tareas - Ingeniería DevOps EP2",
     version="2.0.0"
 )
+
+# Observabilidad: expone métricas Prometheus en /metrics
+Instrumentator().instrument(app).expose(app)
 
 tareas = []
 

@@ -22,10 +22,37 @@ jobs:
           name: coverage-report
           path: htmlcov/
 
+  quality-gate:
+    name: Quality Gate - Cobertura Mínima 70%
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install --upgrade pip && pip install -r requirements.txt
+      - name: Calcular cobertura
+        run: pytest tests/ --cov=app --cov-report=xml --cov-report=term-missing -q
+      - name: Evaluar gate de cobertura (>= 70%)
+        run: |
+          UMBRAL=70
+          COBERTURA=$(python -c "import xml.etree.ElementTree as ET; print(round(float(ET.parse('coverage.xml').getroot().get('line-rate')) * 100, 2))")
+          echo "=================================================="
+          echo "Cobertura total del proyecto: ${COBERTURA}%"
+          echo "Umbral mínimo requerido:      ${UMBRAL}%"
+          echo "=================================================="
+          if python -c "import sys; sys.exit(0 if float('${COBERTURA}') >= ${UMBRAL} else 1)"; then
+            echo "✅ QUALITY GATE PASADO: cobertura ${COBERTURA}% >= ${UMBRAL}%"
+          else
+            echo "❌ QUALITY GATE FALLIDO: cobertura ${COBERTURA}% < ${UMBRAL}%"
+            exit 1
+          fi
+
   security:
     name: Análisis de Seguridad (Snyk)
     runs-on: ubuntu-latest
-    needs: test
+    needs: quality-gate
     steps:
       - uses: actions/checkout@v4
       - uses: snyk/actions/python@master
